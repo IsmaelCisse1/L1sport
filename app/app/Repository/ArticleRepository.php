@@ -2,37 +2,27 @@
 
 namespace App\Repository;
 
+use PDO;
 use Illuminate\Support\Facades\DB;
+use PDOException;
+
 
 class ArticleRepository
 {
+    protected $pdo;
 
-    public function getAll()
+    public function __construct()
     {
-        $pdo = DB::connection()->getPdo();
-
-
-        // $sql = "
-        //     SELECT articles.*
-        //     FROM L1sport.articles
-        //     WHERE articles.article_id = :article_id;
-        // ";
-
-        // $query = $pdo->prepare($sql);
-        // $query->execute([
-        //     "article_id" => 1,
-        // ]);
-
-        $sql = "
-            SELECT articles.*
-            FROM L1sport.articles;
-        ";
-
-        $query = $pdo->prepare($sql);
-        $query->execute();
-
-        $results = $query->fetchAll();
-
-        return $results;
+        $this->pdo = DB::connection()->getPdo();;
+    }
+    public function getAllArticles()
+    {
+        try {
+            $stmt = $this->pdo->query("SELECT * FROM articles");
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Erreur lors de la récupération des articles : " . $e->getMessage());
+            return []; // Retourne un tableau vide en cas d'erreur
+        }
     }
 }

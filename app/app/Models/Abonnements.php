@@ -2,10 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Abonnements extends Model
 {
-    use HasFactory;
+    protected $table = 'abonnements';
+
+    protected $champs = [
+        'nom',
+        'prenom',
+        'email',
+        'mdp',
+        'adresse',
+        'payclick_user'
+
+    ];
 }

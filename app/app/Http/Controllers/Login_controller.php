@@ -9,4 +9,6 @@ class Login_controller extends Controller
         $msg = "Page Connexion";
         return view('Login', compact('msg'));
     }
+
+    public function checking()
 }

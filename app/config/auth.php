@@ -60,15 +60,15 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        /*'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
-        ],
+        ],*/
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'users' => [
+            'driver' => 'database',
+            'table' => 'utilisateurs',
+        ],
     ],
 
     /*
@@ -89,6 +89,7 @@ return [
     | quickly generating a very large amount of password reset tokens.
     |
     */
+
 
     'passwords' => [
         'users' => [

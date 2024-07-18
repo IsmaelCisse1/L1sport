@@ -41,7 +41,7 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{{ route('Ligue1') }}">LIGUE 1</a>
+                                <a class="nav-link active" aria-current="page" href="#">LIGUE 1</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">NOTRE OFFRE</a>
@@ -57,19 +57,36 @@
                 </div>
             </nav>
 
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-            <h1>BIENVENUE SUR L1SPORT</h1>
-            @foreach ($articles as $article)
-            <h2>{{ $article['titreArticle'] }}</h2>
-            <p>{{ $article['contenuArticle'] }}</p>
-            <img src="{{ asset('storage/' . $article['photoArticle']) }}" alt="Image de l'article">
-            @if ($article['videoArticle'])
-            <video controls>
-                <source src="{{ asset('storage/' . $article['videoArticle']) }}" type="video/mp4">
-                Votre navigateur ne prend pas en charge la balise vidéo.
-            </video>
-            @endif
-            @endforeach
+            <div>
+                @if ($article)
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                            <div class="card mb-4">
+                                @if ($article['photoArticle'])
+                                <img src="{{ asset('storage/' . $article['photoArticle']) }}" class="card-img-top" alt="Image de l'article">
+                                @endif
+                                <div class="card-body">
+                                    <h2 class="card-title">{{ $article['titreArticle'] }}</h2>
+                                    <p class="card-text">{{ $article['contenuArticle'] }}</p>
+
+                                    @if ($article['videoArticle'])
+                                    <video controls class="w-100">
+                                        <source src="{{ asset('storage/' . $article['videoArticle']) }}" type="video/mp4">
+                                        Votre navigateur ne prend pas en charge la balise vidéo.
+                                    </video>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @else
+                <p>Article non trouvé.</p>
+                @endif
+
+
+            </div>
         </body>
 
         </html>
